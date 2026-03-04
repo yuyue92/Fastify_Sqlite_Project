@@ -192,7 +192,7 @@ const pagerQuery = {
 };
 
 // ---------- 基础：健康检查 ----------
-app.get('/health', async () => ({ ok: true }));
+app.get('/health', async () => ({ ok: true, time:new Date() }));
 app.get('/__schema', async () => {
   const rows = await all(`SELECT name,type,sql FROM sqlite_master WHERE type IN ('table','index') ORDER BY type,name`);
   return rows;
@@ -615,4 +615,5 @@ const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 app.listen({ port: PORT, host: HOST })
     .catch(err => { app.log.error(err); process.exit(1); });
+
 
